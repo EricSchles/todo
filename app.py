@@ -22,6 +22,24 @@ def index(password):
 	with open("password.txt","r") as f:
 		true_password += f.read().strip("\n")
 	if password == true_password:
-		return render_template("index.html")
+		all_items = Item.query.all()
+		return render_template("index.html",items=all_items)
 	else:
 		return render_template("wrong.html")
+
+@app.route("/add")
+def add():
+	new_item = request.form.get("new_item")
+	item = Item(new_item)
+	db.session.add(item)
+	db.session.commit()
+	all_items = Item.query.all()
+	return render_template(index.html, itmes=all_items)
+
+@app.route("/delete")
+def delete():
+	pass
+
+@app.route("/update")
+def update():
+	pass
