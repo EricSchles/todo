@@ -16,3 +16,12 @@ class Item(db.Model):
 	def __repr(self):
 		return '<Item %r>' % self.item
 
+@app.route("/<password>"):
+def index(password):
+	true_password = ''
+	with open("password.txt","r") as f:
+		true_password += f.read().strip("\n")
+	if password == true_password:
+		return render_template("index.html")
+	else:
+		return render_template("wrong.html")
