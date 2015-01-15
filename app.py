@@ -16,6 +16,10 @@ class Item(db.Model):
 	def __repr(self):
 		return '<Item %r>' % self.item
 
+@app.route("/")
+def splash():
+	return "Nothing to see here"
+	
 @app.route("/<password>"):
 def index(password):
 	true_password = ''
